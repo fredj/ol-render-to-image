@@ -3,16 +3,17 @@
   "version": "0.0.0",
   "license": "BSD-2-Clause",
   "main": "dist/ol-render-to-image.js",
-  "module": "dist/ol-render-to-image.js",
+  "module": "dist/ol-render-to-image.mjs",
   "source": "index.js",
   "scripts": {
-    "prepublish": "microbundle --format es"
+    "start": "parcel serve examples/*.html --no-cache"
   },
   "dependencies": {
-    "html-to-image": "^0.1.0",
-    "ol": "^5.3.2"
+    "ol": "6.0.0-beta.8",
+    "html-to-image": "^0.1.0"
   },
   "devDependencies": {
-    "microbundle": "^0.11.0"
+    "@babel/core": "^7.4.5",
+    "parcel-bundler": "^1.12.3"
   }
 }

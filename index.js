@@ -1,8 +1,12 @@
 import {Map} from 'ol';
-import htmlToImage from 'html-to-image';
+import {toPng} from 'html-to-image';
+
+// FIXME: use http://html2canvas.hertzen.com/features/ ?
 
 /**
  * @typedef {Object} Option
+ * @property {number} width Image width in pixels.
+ * @property {number} height Image height in pixels.
  * @property {number} [dpi]
  * @property {Array<number>} [size]
  * @property {string} [format='png']
@@ -15,17 +19,25 @@ import htmlToImage from 'html-to-image';
  * @return {Promise<string>} Image in dataURL format.
  */
 export function render(view, layers, options) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    const target = document.createElement('div');
+    target.style.width = `${options.width}px`;
+    target.style.height = `${options.height}px`;
+
+    // FIXME: remove this
+    document.body.append(target);
     const map = new Map({
-      target: document.createElement('div'),
+      target: target,
       controls: [],
       interactions: [],
       view: view,
       layers: layers
     });
+    //map.setSize([options.width, options.height]);
 
     map.once('rendercomplete', () => {
-      htmlToImage.toPng(map.getTargetElement()).then((dataURL) => {
+      console.log('rendercomplete');
+      toPng(map.getTargetElement()).then((dataURL) => {
         map.setTarget(null);
         resolve(dataURL);
       });
