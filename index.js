@@ -20,24 +20,22 @@ import {toPng} from 'html-to-image';
  */
 export function render(view, layers, options) {
   return new Promise((resolve) => {
-    const target = document.createElement('div');
-    target.style.width = `${options.width}px`;
-    target.style.height = `${options.height}px`;
-
-    // FIXME: remove this
-    document.body.append(target);
+    const htiOptions = {
+      width: options.width,
+      height: options.height
+    };
     const map = new Map({
-      target: target,
+      target: document.createElement('div'),
       controls: [],
       interactions: [],
       view: view,
       layers: layers
     });
-    //map.setSize([options.width, options.height]);
+    map.setSize([options.width, options.height]);
 
     map.once('rendercomplete', () => {
       console.log('rendercomplete');
-      toPng(map.getTargetElement()).then((dataURL) => {
+      toPng(map.getTargetElement(), htiOptions).then((dataURL) => {
         map.setTarget(null);
         resolve(dataURL);
       });

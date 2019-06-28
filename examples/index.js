@@ -22,5 +22,4 @@ const options = {
 
 render(view, layers, options).then((dataURL) => {
   console.log(dataURL);
-
-})
+});
