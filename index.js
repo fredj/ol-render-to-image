@@ -7,7 +7,7 @@ import {toPng} from 'html-to-image';
  * @typedef {Object} Option
  * @property {number} width Image width in pixels.
  * @property {number} height Image height in pixels.
- * @property {number} [dpi]
+ * @property {number} [pixelRatio=1]
  * @property {Array<number>} [size]
  * @property {string} [format='png']
  */
@@ -26,6 +26,7 @@ export function render(view, layers, options) {
     };
     const map = new Map({
       target: document.createElement('div'),
+      pixelRatio: options.pixelRatio,
       controls: [],
       interactions: [],
       view: view,
