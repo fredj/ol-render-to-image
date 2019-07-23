@@ -6,6 +6,7 @@
   "module": "dist/ol-render-to-image.mjs",
   "source": "index.js",
   "scripts": {
+    "lint": "eslint *.js examples/*.js",
     "start": "parcel serve examples/*.html --no-cache"
   },
   "dependencies": {
@@ -13,7 +14,8 @@
     "html-to-image": "^0.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.5",
+    "eslint": "^6.1.0",
     "parcel-bundler": "^1.12.3"
   }
 }

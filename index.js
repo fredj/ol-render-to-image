@@ -43,5 +43,4 @@ export function render(view, layers, options) {
     });
     map.renderSync();
   });
-
-};
+}
