@@ -5,6 +5,7 @@ import OSM from 'ol/source/OSM.js';
 import {render} from '../index.js';
 
 const view = new View({
+  rotation: Math.PI/4,
   center: [0, 0],
   zoom: 2
 })

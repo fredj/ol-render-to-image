@@ -8,14 +8,13 @@ import {toPng} from 'html-to-image';
  * @property {number} width Image width in pixels.
  * @property {number} height Image height in pixels.
  * @property {number} [pixelRatio=1]
- * @property {Array<number>} [size]
  * @property {string} [format='png']
  */
 
 /**
  * @param {import("ol/View").default} view
- * @param {Array<import("ol/layer/Layer").default>} layers
- * @param {Option} [options]
+ * @param {Array<import("ol/layer/Base").default>} layers
+ * @param {Option} options
  * @return {Promise<string>} Image in dataURL format.
  */
 export function render(view, layers, options) {
@@ -43,4 +42,21 @@ export function render(view, layers, options) {
     });
     map.renderSync();
   });
+}
+
+/**
+ * @param {import("ol/Map").default} map
+ * @param {Option} [options]
+ * @return {Promise<string>} Image in dataURL format.
+ */
+export function renderMap(map, options) {
+  const view = map.getView();
+  const layers = map.getLayers().getArray();
+  const size = map.getSize();
+  // FIXME: get pixelRatio from map
+  options = Object.assign(options || {}, {
+    width: size[0],
+    height: size[1]
+  })
+  return render(view, layers, options);
 }
